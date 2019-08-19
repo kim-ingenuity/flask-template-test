@@ -1,0 +1,8 @@
+version: "3.6"
+services:
+  backend:
+    build: .
+    container_name: flask_apis_${NGINX_PORT}
+    command: ./docker-services/runserver.sh
+    ports:
+      - "${NGINX_PORT}:8000"

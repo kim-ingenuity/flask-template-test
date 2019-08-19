@@ -1,0 +1,15 @@
+server {
+    listen 8000;
+
+    root /code;
+
+    location / {
+	    try_files $uri @wsgi;
+	}
+
+	location @wsgi {
+	    proxy_pass http://unix:/tmp/gunicorn.sock;
+		proxy_read_timeout 60s;
+	    include proxy_params;
+	}
+}

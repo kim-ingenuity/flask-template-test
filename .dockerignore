@@ -1,0 +1,14 @@
+# Project folders
+env/
+docs/
+
+# Project files
+*.md
+!README.md
+.DS_Store
+.git
+.gitignore
+
+# Docker files
+Dockerfile
+docker-compose.yml

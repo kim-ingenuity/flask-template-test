@@ -1,0 +1,27 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+        docker: 18
+  pre_build:
+    commands:
+      - echo Logging in to Amazon ECR...
+      - $(aws ecr get-login --no-include-email --region $AWS_DEFAULT_REGION)
+  build:
+    commands:
+      - echo Building the Docker image $IMAGE_REPO_NAME...
+      - docker build -t $IMAGE_REPO_NAME .
+      - echo Build completed. Tagging image $IMAGE_REPO_NAME with tags `latest` and `$CODEBUILD_RESOLVED_SOURCE_VERSION`...
+      - docker tag $IMAGE_REPO_NAME $IMAGE_REPO_NAME:latest
+      - docker tag $IMAGE_REPO_NAME $IMAGE_REPO_NAME:$CODEBUILD_RESOLVED_SOURCE_VERSION
+  post_build:
+    commands:
+      - echo Pushing the Docker images to ECR...
+      - docker push $IMAGE_REPO_NAME:latest
+      - echo Docker image $IMAGE_REPO_NAME:latest was succesfully pushed.
+      - docker push $IMAGE_REPO_NAME:$CODEBUILD_RESOLVED_SOURCE_VERSION
+      - echo Docker image $IMAGE_REPO_NAME:$CODEBUILD_RESOLVED_SOURCE_VERSION was succesfully pushed.
+      - printf '[{"name":"%s","imageUri":"%s"}]' $TASK_DEFINITION_CONTAINER_NAME $IMAGE_REPO_NAME:$CODEBUILD_RESOLVED_SOURCE_VERSION > imagedefinitions.json
+artifacts:
+  files: imagedefinitions.json
