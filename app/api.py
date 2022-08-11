@@ -17,6 +17,16 @@ api = Api(
     description='Flask API'
 )
 
+@blueprint.route('/health', methods=['GET'])
+def health_check():
+    """
+    Endpoint for checking health status of API. Additional health check conditions
+    can be added here in order to further assess the status of the API.
+    """
+    data = {'healthy': True}
+
+    return data, HTTPStatus.OK
+
 
 @api.errorhandler(ValueError)
 def handle_value_errors(error):

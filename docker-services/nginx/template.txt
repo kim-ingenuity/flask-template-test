@@ -9,7 +9,8 @@ server {
 
 	location @wsgi {
 	    proxy_pass http://unix:/tmp/gunicorn.sock;
-		proxy_read_timeout 60s;
+		proxy_read_timeout ${NGINX_PROXY_READ_TIMEOUT};
+		proxy_connect_timeout ${NGINX_PROXY_CONNECT_TIMEOUT};
 	    include proxy_params;
 	}
 }

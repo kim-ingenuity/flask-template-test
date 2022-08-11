@@ -1,6 +1,6 @@
 #!/bin/bash
 
-apt-get remove -y unzip curl telnet nano
+apt-get remove -y unzip curl telnet nano iputils-ping traceroute
 
 rm /opt/oracle/instantclient_18_3/glogin.sql /opt/oracle/instantclient_18_3/libsqlplus.so
 rm /opt/oracle/instantclient_18_3/libsqlplusic.so /opt/oracle/instantclient_18_3/sqlplus

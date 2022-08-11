@@ -6,6 +6,17 @@ export FLASK_ENV='dev'
 export SQLALCHEMY_TRACK_MODIFICATIONS=False
 export SQLALCHEMY_SESSION_NO_AUTOFLUSH=False
 
+# LOGGING
+# Options: critical, error, warning, info, debug, notset
+export LOGGING_LEVEL='debug'
+
+# DEPLOYMENT
+export UPDATE_DATABASE_TABLES_DURING_CONTAINER_RUN=False
+export GUNICORN_WORKERS=4
+export GUNICORN_TIMEOUT=600
+export NGINX_PROXY_READ_TIMEOUT='600s'
+export NGINX_PROXY_CONNECT_TIMEOUT='600s'
+
 # DATABASE CONNECTION
 # For the database connection, use either the SQLALCHEMY_DATABASE_URI to set the
 # database URI, or the CONN_* variables. If both are used, only the SQLALCHEMY_DATABASE_URI

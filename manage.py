@@ -4,6 +4,7 @@ from flask_migrate import Migrate, MigrateCommand
 from flask_script import Manager
 
 from app.api import blueprint
+from app.models.item import Item
 from core.main import create_app, db
 from core.settings import config_by_name, Config
 from core.utils import ColoredPrint
