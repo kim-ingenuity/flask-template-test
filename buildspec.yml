@@ -5,6 +5,7 @@ phases:
     commands:
       - echo Logging in to Amazon ECR...
       - aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin 382560948490.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com
+      - IMAGE_REPO_NAME=382560948490.dkr.ecr.ap-southeast-1.amazonaws.com/prepaid-metering
   build:
     commands:
       - echo Building the Docker image $IMAGE_REPO_NAME...
@@ -19,6 +20,6 @@ phases:
       - echo Docker image $IMAGE_REPO_NAME:latest was succesfully pushed.
       - docker push $IMAGE_REPO_NAME:$CODEBUILD_RESOLVED_SOURCE_VERSION
       - echo Docker image $IMAGE_REPO_NAME:$CODEBUILD_RESOLVED_SOURCE_VERSION was succesfully pushed.
-      - printf '[{"name":"%s","imageUri":"%s"}]' $TASK_DEFINITION_CONTAINER_NAME $IMAGE_REPO_NAME:$CODEBUILD_RESOLVED_SOURCE_VERSION > imagedefinitions.json
+      - printf '[{"name":"%s","imageUri":"%s"}]' 382560948490.dkr.ecr.ap-southeast-1.amazonaws.com/deploy-test:latest > imagedefinitions.json
 artifacts:
   files: imagedefinitions.json
