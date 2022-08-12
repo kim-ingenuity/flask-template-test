@@ -5,7 +5,7 @@ phases:
     commands:
       - echo Logging in to Amazon ECR...
       - aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin 382560948490.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com
-      - IMAGE_REPO_NAME=382560948490.dkr.ecr.ap-southeast-1.amazonaws.com/prepaid-metering
+      - IMAGE_REPO_NAME=382560948490.dkr.ecr.ap-southeast-1.amazonaws.com/deploy-test
   build:
     commands:
       - echo Building the Docker image $IMAGE_REPO_NAME...
