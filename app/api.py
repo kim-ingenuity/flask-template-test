@@ -1,21 +1,27 @@
 from http import HTTPStatus
+# import resource
 
 from flask import Blueprint
+from flask_restplus import Resource, Api
 
 from sqlalchemy.exc import DatabaseError
 from werkzeug.exceptions import BadRequest, NotFound
 
 from core.main import PatchedApi as Api
 
+from app.resources.test import test 
+
 
 blueprint = Blueprint('flask_api', __name__)
 api = Api(
     blueprint,
     version='1.0',
-    prefix='/api/v1',
+    prefix='/api',
     title='Flask',
     description='Flask API'
 )
+
+
 
 @blueprint.route('/health', methods=['GET'])
 def health_check():
@@ -127,6 +133,8 @@ def handle_all_other_errors(error):
 # ADD NAMESPACES HERE
 # e.g. api.add_namespace(api_hello path='/hello')
 
+api.add_namespace(test, path='/app')
+# api.add_namespace(health_check)
 
 if __name__ == '__main__':
     api.run(debug=True)
