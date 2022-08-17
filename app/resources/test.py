@@ -3,7 +3,7 @@ from app.serializer.test import test_field
 
 from http import HTTPStatus
 
-test = Namespace('test', description='test endpoint')
+test = Namespace('Test', description='test endpoint')
 test_response = test.model('Test-Response', test_field)
 
 @test.route('/test')

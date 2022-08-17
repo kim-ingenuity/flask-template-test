@@ -12,7 +12,7 @@ T = TypeVar('T', bound='Model')
 
 class Model(db.Model):  # type:ignore
     __abstract__ = True
-    __table_args__ = Config.DATABASE_SCHEMA
+    # __table_args__ = Config.DATABASE_SCHEMA
 
     @classmethod
     def find(cls: Type[T], id: Dict[str, Any]) -> Optional[T]:

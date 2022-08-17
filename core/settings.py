@@ -25,8 +25,11 @@ class Config(object):
     SQLALCHEMY_DATABASE_URI = os.getenv('SQLALCHEMY_DATABASE_URI') or conn_url.__to_string__(hide_password=False)
     SQLALCHEMY_TRACK_MODIFICATIONS = convert_to_boolean(os.getenv('SQLALCHEMY_TRACK_MODIFICATIONS', False))
     SQLALCHEMY_SESSION_NO_AUTOFLUSH = convert_to_boolean(os.getenv('SQLALCHEMY_SESSION_NO_AUTOFLUSH', False))
+    
     DATABASE_SCHEMA = json.loads(os.getenv('DATABASE_SCHEMA', '{}'))
     FK_DATABASE_SCHEMA = f"{DATABASE_SCHEMA.get('schema')}." if DATABASE_SCHEMA.get('schema', '') else ''
+
+    CCB_PREPAID_DB_SCHEMA = json.loads(os.getenv('CCB_PREPAID_DB_SCHEMA', '{}'))
 
     DEBUG = False
     SECRET_KEY = os.getenv('SECRET_KEY')

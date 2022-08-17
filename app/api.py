@@ -9,7 +9,8 @@ from werkzeug.exceptions import BadRequest, NotFound
 
 from core.main import PatchedApi as Api
 
-from app.resources.test import test 
+from app.resources.test import test
+from app.resources.validation import api_vending_validation 
 
 
 blueprint = Blueprint('flask_api', __name__)
@@ -134,6 +135,7 @@ def handle_all_other_errors(error):
 # e.g. api.add_namespace(api_hello path='/hello')
 
 api.add_namespace(test, path='/app')
+api.add_namespace(api_vending_validation, path='/app')
 # api.add_namespace(health_check)
 
 if __name__ == '__main__':
