@@ -1,10 +1,10 @@
 from core.main import db
 from core.models import Model
-from core.settings import Config
+# from core.settings import Config
 
 class PrepaidAccountObj(Model):
     __tablename__ = 'PREPAID_ACCOUNTS'
-    __table_args__ = Config.CCB_PREPAID_DB_SCHEMA
+    # __table_args__ = Config.CCB_PREPAID_DB_SCHEMA
 
     du_code = db.Column(db.String(5), nullable=False)
     juice_id = db.Column(db.String(15), nullable=True)

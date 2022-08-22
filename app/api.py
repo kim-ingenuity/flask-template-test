@@ -12,6 +12,8 @@ from core.main import PatchedApi as Api
 from app.resources.test import test
 from app.resources.validation import api_vending_validation 
 
+from .serializer.validation import error_serializer, validate_data_fields
+
 
 blueprint = Blueprint('flask_api', __name__)
 api = Api(
@@ -22,6 +24,8 @@ api = Api(
     description='Flask API'
 )
 
+api.model('Error', error_serializer)
+api.model('Vending-Validate-Data', validate_data_fields)
 
 
 @blueprint.route('/health', methods=['GET'])

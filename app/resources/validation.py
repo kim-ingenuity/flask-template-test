@@ -31,7 +31,7 @@ class AccountValidation(Resource):
     def post(self, **kwargs):
 
         req_data = {
-            'login': None,
+            # 'login': None,
             'du_code': None,
             'account_id': None,
 
@@ -52,12 +52,12 @@ class AccountValidation(Resource):
 
         try:
 
-            user = kwargs.get('user')
-            login = user.username
+            # user = kwargs.get('user')
+            # login = user.username
             account_id = data.get('accountId')
             du_code = data.get('duCode')
 
-            req_data['login'] = login
+            # req_data['login'] = login
             req_data['du_code'] = du_code
             req_data['account_id'] = account_id
 

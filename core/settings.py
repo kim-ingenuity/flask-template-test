@@ -1,5 +1,6 @@
 import json
 import os
+import pytz
 from typing import Dict, Type
 
 from dotenv import load_dotenv
@@ -12,6 +13,9 @@ load_dotenv(dotenv_path='core/.env')
 
 
 class Config(object):
+
+    tz = pytz.timezone('Asia/Manila')
+
     conn_url = make_db_connection_url(
         drivername=os.getenv('CONN_DRIVERNAME'),
         username=os.getenv('CONN_USERNAME'),
@@ -22,9 +26,11 @@ class Config(object):
         query=json.loads(os.getenv('CONN_QUERY', '{}'))
     )
 
-    SQLALCHEMY_DATABASE_URI = os.getenv('SQLALCHEMY_DATABASE_URI') or conn_url.__to_string__(hide_password=False)
+    SQLALCHEMY_DATABASE_URI = conn_url.__to_string__(hide_password=False) #os.getenv('SQLALCHEMY_DATABASE_URI') or
     SQLALCHEMY_TRACK_MODIFICATIONS = convert_to_boolean(os.getenv('SQLALCHEMY_TRACK_MODIFICATIONS', False))
     SQLALCHEMY_SESSION_NO_AUTOFLUSH = convert_to_boolean(os.getenv('SQLALCHEMY_SESSION_NO_AUTOFLUSH', False))
+
+    DU_CODE = os.getenv('DU_CODE', 'veco')
     
     DATABASE_SCHEMA = json.loads(os.getenv('DATABASE_SCHEMA', '{}'))
     FK_DATABASE_SCHEMA = f"{DATABASE_SCHEMA.get('schema')}." if DATABASE_SCHEMA.get('schema', '') else ''
